@@ -1,29 +1,32 @@
 import { Card } from "@/components/ui/card";
 import { Zap, Target, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const features = [
   {
     icon: Zap,
     title: "Lightning Fast",
-    description: "Our automation systems work at incredible speed, processing tasks in seconds that would take hours manually, giving you an instant competitive edge."
+    description: "Our systems operate at remarkable velocity, completing in mere seconds what would consume hours of manual effort, delivering immediate competitive advantage."
   },
   {
     icon: Target,
     title: "Precision & Accuracy",
-    description: "Every system we build is designed with surgical precision, eliminating errors and ensuring your business runs like a well-oiled machine."
+    description: "Each solution we craft is engineered with meticulous attention to detail, removing mistakes and guaranteeing seamless business operations."
   },
   {
     icon: Users,
     title: "Customer-First Design",
-    description: "We don't just automate processes, we create experiences that delight your customers and keep them coming back for more."
+    description: "Beyond simple process automation, we engineer delightful customer experiences that foster loyalty and drive repeat engagement."
   }
 ];
 
 const WhyUs = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="why-us" className="relative py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section id="why-us" className="relative py-20 px-6" ref={ref}>
+      <div className={`max-w-7xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         {/* Section label */}
         <div className="text-center mb-4">
           <span className="text-sm font-semibold text-primary tracking-wider uppercase">Why Us</span>
@@ -36,7 +39,7 @@ const WhyUs = () => {
 
         {/* Description */}
         <p className="text-lg text-muted-foreground text-center max-w-3xl mx-auto mb-16">
-          We don't just offer automation, we reengineer the way your business works. Every system we build is designed to give your customers the fastest, most seamless experience possible.
+          Beyond simple automation solutions, we fundamentally transform business operations. Each solution we create delivers lightning-fast, friction-free customer experiences.
         </p>
 
         {/* Features grid */}

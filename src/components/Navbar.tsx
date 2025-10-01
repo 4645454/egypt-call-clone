@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
@@ -41,6 +41,10 @@ const Navbar = () => {
                     ? "text-primary font-semibold" 
                     : "text-foreground/80 hover:text-foreground"
                 }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
               >
                 Overview
               </a>
@@ -51,6 +55,10 @@ const Navbar = () => {
                     ? "text-primary font-semibold" 
                     : "text-foreground/80 hover:text-foreground"
                 }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
               >
                 Why Us
               </a>
@@ -61,8 +69,22 @@ const Navbar = () => {
                     ? "text-primary font-semibold" 
                     : "text-foreground/80 hover:text-foreground"
                 }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
               >
                 Services
+              </a>
+              <a 
+                href="#" 
+                className="text-sm transition-all duration-300 hover:scale-110 text-foreground/80 hover:text-foreground"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                <img src={logo} alt="Auto Boom" className="h-8 w-8 object-contain" />
               </a>
             </div>
 

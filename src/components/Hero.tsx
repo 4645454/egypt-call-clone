@@ -20,9 +20,9 @@ const Hero = () => {
 
       <div className="relative max-w-6xl mx-auto text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-destructive/20 text-destructive px-4 py-2 rounded-full mb-8 border border-destructive/30">
-          <span className="w-2 h-2 bg-destructive rounded-full animate-pulse" />
-          <span className="text-sm font-medium">Only 8 spots left</span>
+        <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full mb-8 border border-primary/30">
+          <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+          <span className="text-sm font-medium">🔥 Only 10 spots left this month</span>
         </div>
 
         {/* Main heading */}
@@ -42,7 +42,7 @@ const Hero = () => {
 
         {/* Subheading */}
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-          We build AI automation systems that cut costs, increase sales, and transform your business into a market leader, all without hiring more staff.
+          We streamline your operations with AI automation, building round-the-clock systems that let you concentrate on expanding your success.
         </p>
 
         {/* CTA Button */}

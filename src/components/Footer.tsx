@@ -1,30 +1,20 @@
-import logo from "@/assets/logo.jpg";
+import { Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="relative py-12 px-6 border-t border-border">
+    <footer className="py-8 px-6 border-t border-border">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="Auto Boom" className="h-10 w-10 object-contain" />
-            <span className="text-lg font-bold">Auto Boom</span>
-          </div>
-          
-          <div className="flex items-center gap-8">
-            <a href="#overview" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Overview
-            </a>
-            <a href="#why-us" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Why Us
-            </a>
-            <a href="#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Services
-            </a>
-          </div>
-          
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-muted-foreground text-sm">
             © 2025 Auto Boom. All rights reserved.
           </p>
+          <a 
+            href="mailto:info@viralboom.online" 
+            className="flex items-center gap-2 text-sm text-foreground/80 hover:text-primary transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            <span>info@viralboom.online</span>
+          </a>
         </div>
       </div>
     </footer>

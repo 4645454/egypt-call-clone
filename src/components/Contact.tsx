@@ -4,8 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Contact = () => {
+  const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,8 +21,8 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="contact" className="relative py-20 px-6" ref={ref}>
+      <div className={`max-w-4xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
           Ready to{' '}
