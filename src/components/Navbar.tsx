@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Globe } from "lucide-react";
 
 const Navbar = () => {
+  const { language, setLanguage, t } = useLanguage();
   const [activeSection, setActiveSection] = useState("overview");
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["overview", "why-us", "services", "contact"];
+      const sections = ["overview", "why-us", "services", "pricing"];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -46,7 +49,7 @@ const Navbar = () => {
                   document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
               >
-                Overview
+                {t('nav.overview')}
               </a>
               <a 
                 href="#why-us" 
@@ -60,7 +63,7 @@ const Navbar = () => {
                   document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
               >
-                Why Us
+                {t('nav.whyUs')}
               </a>
               <a 
                 href="#services" 
@@ -74,7 +77,21 @@ const Navbar = () => {
                   document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
               >
-                Services
+                {t('nav.services')}
+              </a>
+              <a 
+                href="#pricing" 
+                className={`text-sm transition-all duration-300 hover:scale-110 ${
+                  activeSection === "pricing" 
+                    ? "text-primary font-semibold" 
+                    : "text-foreground/80 hover:text-foreground"
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
+                {t('nav.pricing')}
               </a>
               <a 
                 href="#" 
@@ -88,12 +105,22 @@ const Navbar = () => {
               </a>
             </div>
 
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105"
-              onClick={() => window.location.href = '#contact'}
-            >
-              Let's Talk →
-            </Button>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-card/30 border border-border hover:bg-card/50 transition-all duration-300 hover:scale-105"
+              >
+                <Globe className="w-4 h-4" />
+                <span className="text-sm font-medium">{language === 'en' ? 'AR' : 'EN'}</span>
+              </button>
+              
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105"
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              >
+                {t('nav.bookCall')} →
+              </Button>
+            </div>
           </div>
         </div>
       </div>

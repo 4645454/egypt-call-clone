@@ -3,20 +3,21 @@ import Hero from "@/components/Hero";
 import WhyUs from "@/components/WhyUs";
 import Services from "@/components/Services";
 import Pricing from "@/components/Pricing";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navbar />
-      <Hero />
-      <WhyUs />
-      <Services />
-      <Pricing />
-      <Contact />
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <Navbar />
+        <Hero />
+        <WhyUs />
+        <Services />
+        <Pricing />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 
