@@ -49,7 +49,7 @@ const translations = {
     'services.service2.title': 'Sales Automation',
     'services.service2.desc': 'AI-driven sales assistants that qualify leads, schedule meetings, and increase conversion rates automatically.',
     'services.service3.title': 'Voice AI Agents',
-    'services.service3.desc': 'Natural-sounding voice assistants that handle calls, bookings, and customer inquiries with human-like precision.',
+    'services.service3.desc': 'Natural-sounding voice assistants that understand voice and images, handle calls, bookings, and customer inquiries with human-like precision and respond to them.',
     'services.service4.title': 'Custom AI Solutions',
     'services.service4.desc': 'Tailored AI systems built specifically for your unique business processes and requirements.',
     
@@ -142,7 +142,7 @@ const translations = {
     'services.service2.title': 'أتمتة المبيعات',
     'services.service2.desc': 'مساعدو المبيعات المدفوعون بالذكاء الاصطناعي الذين يؤهلون العملاء المحتملين، ويجدولون الاجتماعات، ويزيدون معدلات التحويل تلقائيًا.',
     'services.service3.title': 'وكلاء الصوت بالذكاء الاصطناعي',
-    'services.service3.desc': 'مساعدون صوتيون ذوو صوت طبيعي يتعاملون مع المكالمات والحجوزات واستفسارات العملاء بدقة تشبه البشر.',
+    'services.service3.desc': 'مساعدون صوتيون بصوت طبيعي يفهمون الصوت والصور ويردون عليها، يتعاملون مع المكالمات والحجوزات واستفسارات العملاء بدقة تشبه البشر.',
     'services.service4.title': 'حلول ذكاء اصطناعي مخصصة',
     'services.service4.desc': 'أنظمة ذكاء اصطناعي مصممة خصيصًا لعمليات عملك ومتطلباتك الفريدة.',
     
