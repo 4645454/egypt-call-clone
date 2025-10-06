@@ -33,7 +33,7 @@ const Hero = () => {
         <Button 
           size="lg"
           className="bg-gradient-to-r from-primary to-orange-500 hover:shadow-[0_0_40px_hsl(30_100%_55%/0.5)] text-primary-foreground font-bold text-lg px-8 transition-all duration-300 hover:scale-105 group"
-          onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
+          onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
         >
           {t('hero.cta')}
           <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
