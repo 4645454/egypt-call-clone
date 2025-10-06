@@ -16,8 +16,9 @@ const Pricing = () => {
         { textKey: "pricing.plan1.feature1", included: true },
         { textKey: "pricing.plan1.feature2", included: true },
         { textKey: "pricing.plan1.feature3", included: true },
-        { textKey: "pricing.plan1.feature4", included: false },
-        { textKey: "pricing.plan1.feature5", included: false }
+        { textKey: "pricing.plan1.feature4", included: true },
+        { textKey: "pricing.plan1.feature5", included: false },
+        { textKey: "pricing.plan1.feature6", included: false }
       ],
       highlighted: false
     },
@@ -32,7 +33,8 @@ const Pricing = () => {
         { textKey: "pricing.plan2.feature2", included: true },
         { textKey: "pricing.plan2.feature3", included: true },
         { textKey: "pricing.plan2.feature4", included: true },
-        { textKey: "pricing.plan2.feature5", included: true }
+        { textKey: "pricing.plan2.feature5", included: true },
+        { textKey: "pricing.plan2.feature6", included: true }
       ],
       highlighted: true
     },
@@ -45,7 +47,8 @@ const Pricing = () => {
         { textKey: "pricing.plan3.feature1", included: true },
         { textKey: "pricing.plan3.feature2", included: true },
         { textKey: "pricing.plan3.feature3", included: true },
-        { textKey: "pricing.plan3.feature4", included: true }
+        { textKey: "pricing.plan3.feature4", included: true },
+        { textKey: "pricing.plan3.feature5", included: true }
       ],
       highlighted: false
     },
@@ -56,7 +59,8 @@ const Pricing = () => {
       messagesKey: "pricing.plan4.messages",
       features: [
         { textKey: "pricing.plan4.feature1", included: true },
-        { textKey: "pricing.plan4.feature2", included: true }
+        { textKey: "pricing.plan4.feature2", included: true },
+        { textKey: "pricing.plan4.feature3", included: true }
       ],
       highlighted: true
     }

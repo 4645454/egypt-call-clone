@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Globe } from "lucide-react";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -106,15 +106,9 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center gap-4">
-              <button
-                onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-                className="flex items-center gap-2 px-3 py-2 rounded-full bg-card/30 border border-border hover:bg-card/50 transition-all duration-300 hover:scale-105"
-              >
-                <Globe className="w-4 h-4" />
-                <span className="text-sm font-medium">{language === 'en' ? 'AR' : 'EN'}</span>
-              </button>
+              <LanguageToggle />
               
-              <Button 
+              <Button
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105"
                 onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
               >
