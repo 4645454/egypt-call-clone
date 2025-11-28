@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 94%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 94%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 94%;
 
-    --primary: 30 100% 50%;
-    --primary-foreground: 0 0% 5%;
+    --primary: 245 100% 65%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 94%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 67%;
 
-    --accent: 30 100% 50%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 245 100% 65%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 30 100% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 245 100% 65%;
 
-    --radius: 0.75rem;
+    --radius: 1.25rem;
   }
 }
 
@@ -49,6 +49,6 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    overflow: hidden;
   }
 }
