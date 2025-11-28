@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "@/components/LanguageToggle";
+import { Sun } from "lucide-react";
 
 const Navbar = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState("overview");
 
   useEffect(() => {
@@ -15,7 +14,7 @@ const Navbar = () => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          return rect.top <= 200 && rect.bottom >= 200;
         }
         return false;
       });
@@ -26,97 +25,43 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="h-1 w-full bg-gradient-to-r from-primary via-accent to-primary animate-gradient"></div>
-      <div className="px-6 py-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between bg-card/50 backdrop-blur-xl border border-border rounded-full px-6 py-3">
-            <div className="flex items-center gap-2">
-              <img src={logo} alt="Auto Boom" className="h-10 w-10 object-contain" />
-            </div>
-            
-            <div className="hidden md:flex items-center gap-8">
-              <a 
-                href="#overview" 
-                className={`text-sm transition-all duration-300 hover:scale-110 ${
-                  activeSection === "overview" 
-                    ? "text-primary font-semibold" 
-                    : "text-foreground/80 hover:text-foreground"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }}
-              >
-                {t('nav.overview')}
-              </a>
-              <a 
-                href="#why-us" 
-                className={`text-sm transition-all duration-300 hover:scale-110 ${
-                  activeSection === "why-us" 
-                    ? "text-primary font-semibold" 
-                    : "text-foreground/80 hover:text-foreground"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }}
-              >
-                {t('nav.whyUs')}
-              </a>
-              <a 
-                href="#services" 
-                className={`text-sm transition-all duration-300 hover:scale-110 ${
-                  activeSection === "services" 
-                    ? "text-primary font-semibold" 
-                    : "text-foreground/80 hover:text-foreground"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }}
-              >
-                {t('nav.services')}
-              </a>
-              <a 
-                href="#pricing" 
-                className={`text-sm transition-all duration-300 hover:scale-110 ${
-                  activeSection === "pricing" 
-                    ? "text-primary font-semibold" 
-                    : "text-foreground/80 hover:text-foreground"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }}
-              >
-                {t('nav.pricing')}
-              </a>
-              <a 
-                href="#" 
-                className="text-sm transition-all duration-300 hover:scale-110 text-foreground/80 hover:text-foreground"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              >
-                <img src={logo} alt="Auto Boom" className="h-8 w-8 object-contain" />
-              </a>
-            </div>
+  const navItems = [
+    { id: "overview", label: t('nav.overview') },
+    { id: "why-us", label: t('nav.whyUs') },
+    { id: "services", label: t('nav.services') },
+    { id: "pricing", label: t('nav.pricing') },
+  ];
 
-            <div className="flex items-center gap-4">
-              <LanguageToggle />
-              
-              <Button
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105"
-                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              >
-                {t('nav.bookCall')} →
-              </Button>
-            </div>
-          </div>
-        </div>
+  return (
+    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+      <div className="flex items-center gap-1 bg-card/90 backdrop-blur-xl border border-border rounded-full px-2 py-2">
+        <span className="px-4 py-2 text-sm font-semibold tracking-widest text-foreground">
+          AUTO BOOM
+        </span>
+        
+        <div className="w-px h-6 bg-border mx-1" />
+        
+        <button className="p-2 rounded-full hover:bg-muted transition-colors">
+          <Sun className="w-4 h-4 text-muted-foreground" />
+        </button>
+        
+        <LanguageToggle />
+        
+        <div className="w-px h-6 bg-border mx-1" />
+
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })}
+            className={`px-4 py-2 text-sm rounded-full transition-all duration-200 ${
+              activeSection === item.id
+                ? "bg-muted text-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {item.label}
+          </button>
+        ))}
       </div>
     </nav>
   );
