@@ -1,42 +1,33 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ArrowDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/logo.png";
 
 const Hero = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const { t } = useLanguage();
 
   return (
-    <section id="overview" className="relative min-h-screen flex items-center justify-center px-6 pt-32 pb-20 overflow-hidden" ref={ref}>
-      {/* Gradient orbs */}
-      <div className="absolute top-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-
-      <div className={`relative max-w-6xl mx-auto text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm animate-fade-in">
-          <span className="text-sm font-semibold text-primary">{t('hero.badge')}</span>
-        </div>
+    <section id="overview" className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
+      <div className="text-center max-w-3xl mx-auto">
+        <img src={logo} alt="Auto Boom" className="w-24 h-24 mx-auto mb-8 rounded-full" />
         
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
           {t('hero.title1')}{' '}
-          <span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">
-            {t('hero.title2')}
-          </span>
-          {' '}{t('hero.title3')}
+          <span className="text-primary">{t('hero.title2')}</span>
         </h1>
         
-        <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-          {t('hero.description')}
+        <p className="text-muted-foreground text-lg uppercase tracking-widest mb-12">
+          {t('hero.badge')}
         </p>
 
         <Button 
+          variant="ghost"
           size="lg"
-          className="bg-gradient-to-r from-primary to-orange-500 hover:shadow-[0_0_40px_hsl(30_100%_55%/0.5)] text-primary-foreground font-bold text-lg px-8 transition-all duration-300 hover:scale-105 group"
-          onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+          className="text-muted-foreground hover:text-foreground"
+          onClick={() => document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' })}
         >
+          <ArrowDown className="w-5 h-5 mr-2" />
           {t('hero.cta')}
-          <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
     </section>
