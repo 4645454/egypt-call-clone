@@ -15,26 +15,28 @@
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 94%;
 
-    --primary: 245 100% 65%;
+    --primary: 225 100% 60%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 16%;
     --secondary-foreground: 0 0% 94%;
 
     --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 67%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 245 100% 65%;
+    --accent: 225 100% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
+    --border: 0 0% 22%;
     --input: 0 0% 20%;
-    --ring: 245 100% 65%;
+    --ring: 225 100% 60%;
 
     --radius: 1.25rem;
+    
+    --card-shadow: 0 0 60px -15px hsl(225 100% 60% / 0.15);
   }
 }
 
