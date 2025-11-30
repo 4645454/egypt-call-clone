@@ -190,7 +190,7 @@ const MainApp = () => {
       </div>
 
       {/* Main Card */}
-      <div className="w-full max-w-5xl flex-1 my-4 bg-card rounded-3xl border border-border overflow-hidden flex flex-col">
+      <div className="w-full max-w-5xl flex-1 my-4 bg-card rounded-3xl border border-border overflow-hidden flex flex-col" style={{ boxShadow: 'var(--card-shadow)' }}>
         {/* Content Area */}
         <div className="flex-1 overflow-hidden relative">
           {renderContent()}
