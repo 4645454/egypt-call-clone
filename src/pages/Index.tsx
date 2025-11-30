@@ -6,18 +6,36 @@ import logo from "@/assets/logo.png";
 const HomeContent = () => {
   const { t } = useLanguage();
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center px-8">
-      <img src={logo} alt="Auto Boom" className="w-20 h-20 rounded-full mb-6" />
-      <h1 className="text-3xl md:text-4xl font-bold mb-2">
-        {t('hero.title')} <span className="text-primary">{t('hero.titleHighlight')}</span>
-      </h1>
-      <p className="text-muted-foreground max-w-lg mt-4">{t('hero.description')}</p>
-      <button 
-        className="mt-8 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
-        onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
-      >
-        {t('hero.cta')}
-      </button>
+    <div className="flex items-center justify-between h-full px-12">
+      {/* Left Content */}
+      <div className="flex flex-col items-start">
+        <p className="text-muted-foreground text-lg mb-2">{t('hero.title')}</p>
+        <h1 className="text-5xl md:text-6xl font-bold mb-4">
+          <span className="text-primary">{t('hero.titleHighlight')}</span>
+        </h1>
+        <p className="text-muted-foreground text-lg mb-8">{t('hero.description')}</p>
+        <div className="flex gap-4">
+          <button 
+            className="px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
+            onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
+          >
+            {t('hero.cta')}
+          </button>
+          <button 
+            className="px-6 py-3 bg-transparent text-foreground border border-border rounded-full font-medium hover:bg-secondary transition-colors"
+            onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
+          >
+            {t('nav.pricing')}
+          </button>
+        </div>
+      </div>
+      
+      {/* Right Logo */}
+      <div className="hidden md:flex items-center justify-center">
+        <div className="w-64 h-64 rounded-full bg-secondary flex items-center justify-center">
+          <img src={logo} alt="Auto Boom" className="w-48 h-48 rounded-full object-cover" />
+        </div>
+      </div>
     </div>
   );
 };
@@ -156,49 +174,49 @@ const MainApp = () => {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center p-4 md:p-8">
+    <div className="h-screen w-screen flex flex-col items-center justify-between py-6 px-4 md:px-8">
+      {/* Top Header */}
+      <div className="flex items-center gap-3 bg-card rounded-full px-4 py-2 border border-border">
+        <span className="text-sm font-bold tracking-widest">AUTO BOOM</span>
+        <button className="p-2 rounded-full hover:bg-muted transition-colors">
+          <Sun className="w-4 h-4 text-muted-foreground" />
+        </button>
+        <button
+          onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+          className="px-3 py-1.5 text-xs rounded-full border border-dashed border-primary text-primary hover:bg-primary/10 transition-colors"
+        >
+          {language === 'en' ? 'Ar' : 'En'}
+        </button>
+      </div>
+
       {/* Main Card */}
-      <div className="w-full max-w-5xl h-[90vh] max-h-[700px] bg-card rounded-3xl border border-border overflow-hidden flex flex-col">
+      <div className="w-full max-w-5xl flex-1 my-4 bg-card rounded-3xl border border-border overflow-hidden flex flex-col">
         {/* Content Area */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden relative">
           {renderContent()}
-        </div>
-
-        {/* Bottom Navigation */}
-        <div className="p-4 border-t border-border">
-          <div className="flex items-center justify-center gap-1 bg-secondary/50 rounded-full p-1.5 max-w-fit mx-auto">
-            <span className="px-4 py-2 text-sm font-bold">AUTO BOOM</span>
-            
-            <div className="w-px h-5 bg-border mx-1" />
-            
-            <button className="p-2 rounded-full hover:bg-muted transition-colors">
-              <Sun className="w-4 h-4 text-muted-foreground" />
-            </button>
-            
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-              className="px-3 py-1.5 text-xs rounded-full border border-dashed border-primary text-primary hover:bg-primary/10 transition-colors"
-            >
-              {language === 'en' ? 'Ar' : 'En'}
-            </button>
-            
-            <div className="w-px h-5 bg-border mx-1" />
-
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-3 py-2 text-xs rounded-full transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-muted text-foreground font-medium'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          {/* Footer inside card */}
+          <div className="absolute bottom-4 left-6 text-xs text-muted-foreground">
+            <span className="inline-block w-2 h-2 rounded-full bg-primary mr-2"></span>
+            Made by <span className="text-primary">Auto Boom</span>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="flex items-center gap-1 bg-card rounded-full p-1.5 border border-border">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`px-4 py-2 text-sm rounded-full transition-all ${
+              activeTab === tab.id
+                ? 'bg-secondary text-foreground font-medium'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
     </div>
   );
