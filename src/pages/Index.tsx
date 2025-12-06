@@ -234,13 +234,8 @@ const MainApp = () => {
       {/* Main Card */}
       <div className="w-full max-w-5xl flex-1 my-4 bg-card rounded-3xl border border-border overflow-hidden flex flex-col" style={{ boxShadow: 'var(--card-shadow)' }}>
         {/* Content Area - Scrollable */}
-        <div className="flex-1 overflow-y-auto relative">
+        <div className="flex-1 overflow-y-auto">
           {renderContent()}
-          {/* Footer inside card */}
-          <div className="sticky bottom-0 left-0 p-4 text-xs text-muted-foreground bg-card">
-            <span className="inline-block w-2 h-2 rounded-full bg-primary mr-2"></span>
-            Made by <span className="text-primary">Auto Boom</span>
-          </div>
         </div>
       </div>
 
