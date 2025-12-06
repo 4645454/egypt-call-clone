@@ -47,17 +47,17 @@ const HomeContent = () => {
       </div>
 
       {/* Videos Section */}
-      <div className="flex-1 flex items-center justify-center gap-4">
+      <div className="flex-1 flex items-center justify-center gap-6">
         {videos.map((video) => (
-          <div key={video.name} className="flex flex-col items-center">
-            <span className="text-sm font-medium mb-2 text-foreground">{video.name}</span>
+          <div key={video.name} className="flex flex-col items-center group">
+            <span className="text-sm font-medium mb-3 text-foreground">{video.name}</span>
             <video
               src={video.src}
               autoPlay
               loop
               muted
               playsInline
-              className="w-36 h-64 object-cover rounded-xl border border-border"
+              className="w-44 h-80 object-cover rounded-2xl border border-border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50"
             />
           </div>
         ))}
