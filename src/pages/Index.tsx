@@ -1,40 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
-import { Sun } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import logo from "@/assets/logo.png";
+
+const videos = [
+  { name: 'WhatsApp', src: '/videos/whatsapp.mp4' },
+  { name: 'Facebook', src: '/videos/facebook.mp4' },
+  { name: 'Instagram', src: '/videos/instagram.mp4' },
+];
 
 const HomeContent = () => {
   const { t } = useLanguage();
   return (
-    <div className="flex items-center justify-between h-full px-12">
-      {/* Left Content */}
-      <div className="flex flex-col items-start">
-        <p className="text-muted-foreground text-lg mb-2">{t('hero.title')}</p>
-        <h1 className="text-5xl md:text-6xl font-bold mb-4">
-          <span className="text-primary">{t('hero.titleHighlight')}</span>
-        </h1>
-        <p className="text-muted-foreground text-lg mb-8">{t('hero.description')}</p>
-        <div className="flex gap-4">
-          <button 
-            className="px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
-            onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
-          >
-            {t('hero.cta')}
-          </button>
-          <button 
-            className="px-6 py-3 bg-transparent text-foreground border border-border rounded-full font-medium hover:bg-secondary transition-colors"
-            onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
-          >
-            {t('nav.pricing')}
-          </button>
+    <div className="flex flex-col h-full px-8 py-6">
+      {/* Top Section */}
+      <div className="flex items-center justify-between mb-6">
+        {/* Left Content */}
+        <div className="flex flex-col items-start">
+          <p className="text-muted-foreground text-base mb-1">{t('hero.title')}</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            <span className="text-primary">{t('hero.titleHighlight')}</span>
+          </h1>
+          <p className="text-muted-foreground text-sm mb-4 max-w-md">{t('hero.description')}</p>
+          <div className="flex gap-3">
+            <button 
+              className="px-5 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+              onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
+            >
+              {t('hero.cta')}
+            </button>
+            <button 
+              className="px-5 py-2.5 bg-transparent text-foreground border border-border rounded-full text-sm font-medium hover:bg-secondary transition-colors"
+              onClick={() => window.open('https://calendly.com/muzoreda/auto-boom', '_blank')}
+            >
+              {t('nav.pricing')}
+            </button>
+          </div>
+        </div>
+        
+        {/* Right Logo */}
+        <div className="hidden md:flex items-center justify-center">
+          <div className="w-40 h-40 rounded-full bg-secondary flex items-center justify-center">
+            <img src={logo} alt="Auto Boom" className="w-32 h-32 rounded-full object-cover" />
+          </div>
         </div>
       </div>
-      
-      {/* Right Logo */}
-      <div className="hidden md:flex items-center justify-center">
-        <div className="w-64 h-64 rounded-full bg-secondary flex items-center justify-center">
-          <img src={logo} alt="Auto Boom" className="w-48 h-48 rounded-full object-cover" />
-        </div>
+
+      {/* Videos Section */}
+      <div className="flex-1 flex items-center justify-center gap-4">
+        {videos.map((video) => (
+          <div key={video.name} className="flex flex-col items-center">
+            <span className="text-sm font-medium mb-2 text-foreground">{video.name}</span>
+            <video
+              src={video.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-36 h-64 object-cover rounded-xl border border-border"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -153,6 +179,15 @@ const ContactContent = () => {
 const MainApp = () => {
   const { language, setLanguage, t } = useLanguage();
   const [activeTab, setActiveTab] = useState('home');
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const tabs = [
     { id: 'home', label: t('nav.home') },
@@ -178,8 +213,15 @@ const MainApp = () => {
       {/* Top Header */}
       <div className="flex items-center gap-3 bg-card rounded-full px-4 py-2 border border-border">
         <span className="text-sm font-bold tracking-widest">AUTO BOOM</span>
-        <button className="p-2 rounded-full hover:bg-muted transition-colors">
-          <Sun className="w-4 h-4 text-muted-foreground" />
+        <button 
+          onClick={() => setIsDark(!isDark)}
+          className="p-2 rounded-full hover:bg-muted transition-colors"
+        >
+          {isDark ? (
+            <Sun className="w-4 h-4 text-muted-foreground" />
+          ) : (
+            <Moon className="w-4 h-4 text-muted-foreground" />
+          )}
         </button>
         <button
           onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
