@@ -57,7 +57,7 @@ const HomeContent = () => {
               loop
               muted
               playsInline
-              className="w-44 h-80 object-cover rounded-2xl border border-border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50"
+              className="w-52 h-[420px] object-cover rounded-2xl border border-border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50"
             />
           </div>
         ))}
