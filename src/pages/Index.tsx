@@ -107,15 +107,19 @@ const WhyUsContent = () => {
   ];
   
   return (
-    <div className="h-full overflow-y-auto px-6 py-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="h-full overflow-y-auto px-6 py-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {features.map((feature, i) => (
-          <div key={i} className="bg-secondary rounded-xl p-4 flex flex-col">
-            <div className="w-12 h-12 rounded-lg overflow-hidden mb-3">
+          <div 
+            key={i} 
+            className="bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-5 flex flex-col border border-border/30 opacity-0 animate-fade-in-up hover:scale-105 hover:border-primary/40 transition-all duration-300"
+            style={{ animationDelay: `${i * 100}ms` }}
+          >
+            <div className="w-16 h-16 rounded-xl overflow-hidden mb-4">
               <img src={feature.image} alt="" className="w-full h-full object-cover" />
             </div>
-            <h3 className="font-semibold text-sm mb-1">{feature.title}</h3>
-            <p className="text-muted-foreground text-xs">{feature.desc}</p>
+            <h3 className="font-semibold text-base mb-2">{feature.title}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
           </div>
         ))}
       </div>
