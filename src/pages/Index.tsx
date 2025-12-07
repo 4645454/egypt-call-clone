@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 import { Sun, Moon } from "lucide-react";
 import logo from "@/assets/logo.png";
+import featureSpeed from "@/assets/feature-speed.jpg";
+import feature247 from "@/assets/feature-247.jpg";
+import featureBrandVoice from "@/assets/feature-brand-voice.jpg";
+import featureSavings from "@/assets/feature-savings.jpg";
+import featureSecurity from "@/assets/feature-security.jpg";
+import featureSales from "@/assets/feature-sales.jpg";
+import featureCustomize from "@/assets/feature-customize.jpg";
+import featureNoPassword from "@/assets/feature-no-password.jpg";
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="#25D366">
@@ -56,21 +64,56 @@ const HomeContent = () => {
 const WhyUsContent = () => {
   const { t } = useLanguage();
   const features = [
-    { title: t('whyUs.feature1.title'), desc: t('whyUs.feature1.desc') },
-    { title: t('whyUs.feature2.title'), desc: t('whyUs.feature2.desc') },
-    { title: t('whyUs.feature3.title'), desc: t('whyUs.feature3.desc') },
-    { title: t('whyUs.feature4.title'), desc: t('whyUs.feature4.desc') },
-    { title: t('whyUs.feature5.title'), desc: t('whyUs.feature5.desc') },
-    { title: t('whyUs.feature6.title'), desc: t('whyUs.feature6.desc') },
+    { 
+      title: t('whyUs.feature1.title'), 
+      desc: t('whyUs.feature1.desc'),
+      image: featureSpeed
+    },
+    { 
+      title: t('whyUs.feature2.title'), 
+      desc: t('whyUs.feature2.desc'),
+      image: feature247
+    },
+    { 
+      title: t('whyUs.feature3.title'), 
+      desc: t('whyUs.feature3.desc'),
+      image: featureBrandVoice
+    },
+    { 
+      title: t('whyUs.feature4.title'), 
+      desc: t('whyUs.feature4.desc'),
+      image: featureSavings
+    },
+    { 
+      title: t('whyUs.feature5.title'), 
+      desc: t('whyUs.feature5.desc'),
+      image: featureSecurity
+    },
+    { 
+      title: t('whyUs.feature6.title'), 
+      desc: t('whyUs.feature6.desc'),
+      image: featureSales
+    },
+    { 
+      title: t('whyUs.feature7.title'), 
+      desc: t('whyUs.feature7.desc'),
+      image: featureCustomize
+    },
+    { 
+      title: t('whyUs.feature8.title'), 
+      desc: t('whyUs.feature8.desc'),
+      image: featureNoPassword
+    },
   ];
   
   return (
     <div className="h-full overflow-y-auto px-6 py-4">
-      <h2 className="text-xl font-bold text-center mb-2">{t('whyUs.title')}</h2>
-      <p className="text-muted-foreground text-center text-sm mb-6">{t('whyUs.subtitle')}</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {features.map((feature, i) => (
-          <div key={i} className="bg-secondary rounded-xl p-4">
+          <div key={i} className="bg-secondary rounded-xl p-4 flex flex-col">
+            <div className="w-12 h-12 rounded-lg overflow-hidden mb-3">
+              <img src={feature.image} alt="" className="w-full h-full object-cover" />
+            </div>
             <h3 className="font-semibold text-sm mb-1">{feature.title}</h3>
             <p className="text-muted-foreground text-xs">{feature.desc}</p>
           </div>
