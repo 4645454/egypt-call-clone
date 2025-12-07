@@ -11,7 +11,7 @@ interface LanguageContextType {
 const translations = {
   en: {
     'nav.home': 'Home',
-    'nav.whyUs': 'Why Us',
+    'nav.whyUs': 'Why',
     'nav.platforms': 'Platforms',
     'nav.pricing': 'Pricing',
     'nav.contact': 'Contact',
@@ -37,7 +37,7 @@ const translations = {
     'whyUs.feature6.desc': 'Not just responding — also selling! Suggests products and services to increase your profits.',
     
     'platforms.title': 'We work on all platforms',
-    'platforms.subtitle': 'One AI Agent responds on all platforms at the same moment!',
+    'platforms.subtitle': 'One Agent runs your customer service everywhere… without missing a message.',
     
     'pricing.title': 'Packages and Prices',
     'pricing.subtitle': 'Choose the package that suits your goals',
@@ -65,7 +65,7 @@ const translations = {
   },
   ar: {
     'nav.home': 'الرئيسية',
-    'nav.whyUs': 'لماذا نحن',
+    'nav.whyUs': 'ليه',
     'nav.platforms': 'المنصات',
     'nav.pricing': 'الأسعار',
     'nav.contact': 'اتصل الآن',
@@ -91,7 +91,7 @@ const translations = {
     'whyUs.feature6.desc': 'مش بس بيرد — كمان بيبيع! يقترح منتجات وخدمات تزيد أرباحك.',
     
     'platforms.title': 'نشتغل على كل المنصات',
-    'platforms.subtitle': 'AI Agent واحد يرد على كل المنصات في نفس اللحظة!',
+    'platforms.subtitle': 'Agent واحد يشغّل خدمة العملاء عندك في كل مكان… بدون ما يفوّت رسالة.',
     
     'pricing.title': 'الباقات والأسعار',
     'pricing.subtitle': 'اختر الباقة المناسبة لأهدافك',
