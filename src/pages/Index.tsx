@@ -36,8 +36,16 @@ const videos = [
 ];
 
 const HomeContent = () => {
+  const { t } = useLanguage();
   return (
     <div className="flex flex-col h-full px-8 py-6">
+      {/* AI Tagline */}
+      <div className="text-center mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-white">
+          {t('home.aiTagline')} 🔥
+        </h2>
+      </div>
+      
       {/* Videos Section */}
       <div className="flex-1 flex items-center justify-center gap-6">
         {videos.map((video) => (
@@ -52,7 +60,7 @@ const HomeContent = () => {
               loop
               muted
               playsInline
-              className="w-72 h-[500px] object-cover rounded-2xl border border-border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50"
+              className="w-72 h-[450px] object-cover rounded-2xl border border-border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50"
             />
           </div>
         ))}
@@ -167,7 +175,9 @@ const PlatformsContent = () => {
 };
 
 const PricingContent = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [selectedCampaignDays, setSelectedCampaignDays] = useState<number | null>(null);
+  const [selectedSubscriptionDays, setSelectedSubscriptionDays] = useState<string | null>(null);
   
   const campaignPlans = [
     { days: 1, price: 200, popular: false },
@@ -179,7 +189,7 @@ const PricingContent = () => {
     { days: 30, price: 4500, popular: false },
   ];
 
-  const subscriptionPlans = {
+  const subscriptionPlans: Record<string, Array<{ name: string; nameAr: string; price: number; messages: number; platforms: number; perPlatform: boolean; bestValue?: boolean }>> = {
     '1': [
       { name: 'Basic', nameAr: 'أساسي', price: 100, messages: 350, platforms: 1, perPlatform: false },
       { name: 'Professional', nameAr: 'احترافي', price: 150, messages: 700, platforms: 1, perPlatform: false },
@@ -206,110 +216,150 @@ const PricingContent = () => {
     ],
   };
 
-  const { language } = useLanguage();
+  const campaignDaysOptions = [1, 3, 7, 10, 15, 20, 30];
+  const subscriptionDaysOptions = ['1', '5', '10', '30'];
 
   return (
     <div className="h-full overflow-y-auto px-6 py-6">
       {/* Campaign Plans Section */}
       <section className="mb-10">
-        <h2 className="text-2xl font-bold text-center mb-2">{t('pricing.campaignTitle')}</h2>
-        <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.campaignSubtitle')}</p>
+        <h2 className="text-2xl font-bold text-center mb-2 text-white">{t('pricing.campaignTitle')}</h2>
+        <p className="text-gray-300 text-center text-sm mb-6">{t('pricing.campaignSubtitle')}</p>
         
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
-          {campaignPlans.map((plan, i) => (
-            <div 
-              key={i}
-              className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-4 border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] cursor-pointer opacity-0 animate-fade-in-up ${
-                plan.popular ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-border/30 hover:border-primary/50'
-              }`}
-              style={{ animationDelay: `${i * 50}ms` }}
-            >
-              {plan.popular && (
-                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  {t('pricing.popular')}
-                </div>
-              )}
-              <div className="text-center">
-                <div className="text-lg font-bold mb-1">
-                  {plan.days} {plan.days === 1 ? t('pricing.day') : t('pricing.days')}
-                </div>
-                <div className="text-2xl font-bold text-primary mb-2">
-                  {plan.price.toLocaleString()}
-                  <span className="text-xs text-muted-foreground ml-1">EGP</span>
-                </div>
-                <button className="w-full py-2 bg-primary/10 text-primary text-xs font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                  {t('pricing.startCampaign')}
-                </button>
-              </div>
-            </div>
-          ))}
+        {/* Campaign Days Tabs */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-1 bg-[#0f0f1a] rounded-full p-1.5 border border-border/30">
+            {campaignDaysOptions.map((days) => (
+              <button
+                key={days}
+                onClick={() => setSelectedCampaignDays(selectedCampaignDays === days ? null : days)}
+                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
+                  selectedCampaignDays === days
+                    ? 'bg-primary text-primary-foreground font-medium'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                {days} {days === 1 ? t('pricing.day') : t('pricing.days')}
+              </button>
+            ))}
+          </div>
         </div>
+        
+        {/* Campaign Cards */}
+        {selectedCampaignDays !== null && (
+          <div className="flex justify-center">
+            {campaignPlans
+              .filter((plan) => plan.days === selectedCampaignDays)
+              .map((plan, i) => (
+                <div 
+                  key={i}
+                  className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-6 border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] cursor-pointer animate-fade-in max-w-xs w-full ${
+                    plan.popular ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-border/30 hover:border-primary/50'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      {t('pricing.popular')}
+                    </div>
+                  )}
+                  <div className="text-center">
+                    <div className="text-xl font-bold mb-2 text-white">
+                      {plan.days} {plan.days === 1 ? t('pricing.day') : t('pricing.days')}
+                    </div>
+                    <div className="text-3xl font-bold text-primary mb-3">
+                      {plan.price.toLocaleString()}
+                      <span className="text-sm text-gray-400 ml-1">EGP</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-sm text-gray-300 mb-4">
+                      <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{t('pricing.unlimited')}</span>
+                    </div>
+                    <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
+                      {t('pricing.startCampaign')}
+                    </button>
+                  </div>
+                </div>
+              ))}
+          </div>
+        )}
       </section>
 
       {/* Subscription Plans Section */}
       <section>
-        <h2 className="text-2xl font-bold text-center mb-2">{t('pricing.subscriptionTitle')}</h2>
-        <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.subscriptionSubtitle')}</p>
+        <h2 className="text-2xl font-bold text-center mb-2 text-white">{t('pricing.subscriptionTitle')}</h2>
+        <p className="text-gray-300 text-center text-sm mb-6">{t('pricing.subscriptionSubtitle')}</p>
 
-        {Object.entries(subscriptionPlans).map(([duration, plans], groupIndex) => (
-          <div key={duration} className="mb-8">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center text-sm font-bold">
-                {duration}
-              </span>
-              {duration === '1' ? t('pricing.dayPlan') : t('pricing.daysPlan').replace('{n}', duration)}
-            </h3>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {plans.map((plan, i) => (
-                <div 
-                  key={i}
-                  className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer opacity-0 animate-fade-in-up ${
-                    plan.bestValue ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.25)]' : 'border-border/30 hover:border-primary/50'
-                  }`}
-                  style={{ animationDelay: `${(groupIndex * 4 + i) * 50}ms` }}
-                >
-                  {plan.bestValue && (
-                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-400 text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full">
-                      {t('pricing.bestValue')}
-                    </div>
-                  )}
-                  
-                  <div className="text-center mb-4">
-                    <h4 className="font-bold text-lg mb-1">{language === 'ar' ? plan.nameAr : plan.name}</h4>
-                    <div className="text-3xl font-bold text-primary">
-                      {plan.price.toLocaleString()}
-                      <span className="text-sm text-muted-foreground ml-1">EGP</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm">
-                      <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                      </svg>
-                      <span className="text-muted-foreground">
-                        {plan.messages.toLocaleString()} {plan.perPlatform ? t('pricing.perPlatformMsg') : t('pricing.messages')}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span className="text-muted-foreground">
-                        {plan.platforms} {plan.platforms === 1 ? t('pricing.platform') : t('pricing.platforms')}
-                      </span>
-                    </div>
-                  </div>
-
-                  <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
-                    {t('pricing.subscribe')}
-                  </button>
-                </div>
-              ))}
-            </div>
+        {/* Subscription Days Tabs */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-1 bg-[#0f0f1a] rounded-full p-1.5 border border-border/30">
+            {subscriptionDaysOptions.map((days) => (
+              <button
+                key={days}
+                onClick={() => setSelectedSubscriptionDays(selectedSubscriptionDays === days ? null : days)}
+                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
+                  selectedSubscriptionDays === days
+                    ? 'bg-primary text-primary-foreground font-medium'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                {days} {days === '1' ? t('pricing.day') : t('pricing.days')}
+              </button>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Subscription Cards */}
+        {selectedSubscriptionDays !== null && subscriptionPlans[selectedSubscriptionDays] && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-fade-in">
+            {subscriptionPlans[selectedSubscriptionDays].map((plan, i) => (
+              <div 
+                key={i}
+                className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer ${
+                  plan.bestValue ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.25)]' : 'border-border/30 hover:border-primary/50'
+                }`}
+              >
+                {plan.bestValue && (
+                  <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-400 text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full">
+                    {t('pricing.bestValue')}
+                  </div>
+                )}
+                
+                <div className="text-center mb-4">
+                  <h4 className="font-bold text-lg mb-1 text-white">{language === 'ar' ? plan.nameAr : plan.name}</h4>
+                  <div className="text-3xl font-bold text-primary">
+                    {plan.price.toLocaleString()}
+                    <span className="text-sm text-gray-400 ml-1">EGP</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center gap-2 text-sm">
+                    <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <span className="text-gray-300">
+                      {plan.messages.toLocaleString()} {plan.perPlatform ? t('pricing.perPlatformMsg') : t('pricing.messages')}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-gray-300">
+                      {plan.platforms} {plan.platforms === 1 ? t('pricing.platform') : t('pricing.platforms')}
+                    </span>
+                  </div>
+                </div>
+
+                <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
+                  {t('pricing.subscribe')}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );
