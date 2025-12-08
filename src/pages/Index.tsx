@@ -168,33 +168,149 @@ const PlatformsContent = () => {
 
 const PricingContent = () => {
   const { t } = useLanguage();
-  const plans = [
-    { name: t('pricing.basic'), price: '100', messages: '350', platforms: '1' },
-    { name: t('pricing.pro'), price: '150', messages: '700', platforms: '1' },
-    { name: t('pricing.business'), price: '200', messages: '400', platforms: '3', perPlatform: true },
-    { name: t('pricing.advanced'), price: '250', messages: '750', platforms: '3', perPlatform: true },
-  ];
   
+  const campaignPlans = [
+    { days: 1, price: 200, popular: false },
+    { days: 3, price: 500, popular: false },
+    { days: 7, price: 1000, popular: true },
+    { days: 10, price: 1500, popular: false },
+    { days: 15, price: 2200, popular: false },
+    { days: 20, price: 3000, popular: false },
+    { days: 30, price: 4500, popular: false },
+  ];
+
+  const subscriptionPlans = {
+    '1': [
+      { name: 'Basic', nameAr: 'أساسي', price: 100, messages: 350, platforms: 1, perPlatform: false },
+      { name: 'Professional', nameAr: 'احترافي', price: 150, messages: 700, platforms: 1, perPlatform: false },
+      { name: 'Business', nameAr: 'أعمال', price: 200, messages: 400, platforms: 3, perPlatform: true },
+      { name: 'Enterprise', nameAr: 'مؤسسي', price: 250, messages: 750, platforms: 3, perPlatform: true },
+    ],
+    '5': [
+      { name: 'Basic', nameAr: 'أساسي', price: 350, messages: 1000, platforms: 1, perPlatform: false },
+      { name: 'Professional', nameAr: 'احترافي', price: 450, messages: 1500, platforms: 1, perPlatform: false },
+      { name: 'Business', nameAr: 'أعمال', price: 550, messages: 1000, platforms: 3, perPlatform: true },
+      { name: 'Enterprise', nameAr: 'مؤسسي', price: 700, messages: 1500, platforms: 3, perPlatform: true },
+    ],
+    '10': [
+      { name: 'Basic', nameAr: 'أساسي', price: 1000, messages: 4000, platforms: 1, perPlatform: false, bestValue: true },
+      { name: 'Professional', nameAr: 'احترافي', price: 1200, messages: 8500, platforms: 1, perPlatform: false },
+      { name: 'Business', nameAr: 'أعمال', price: 1400, messages: 4000, platforms: 3, perPlatform: true },
+      { name: 'Enterprise', nameAr: 'مؤسسي', price: 1650, messages: 8000, platforms: 3, perPlatform: true, bestValue: true },
+    ],
+    '30': [
+      { name: 'Basic', nameAr: 'أساسي', price: 2500, messages: 10000, platforms: 1, perPlatform: false },
+      { name: 'Professional', nameAr: 'احترافي', price: 3500, messages: 20000, platforms: 1, perPlatform: false },
+      { name: 'Business', nameAr: 'أعمال', price: 4500, messages: 10000, platforms: 3, perPlatform: true },
+      { name: 'Enterprise', nameAr: 'مؤسسي', price: 6000, messages: 20000, platforms: 3, perPlatform: true },
+    ],
+  };
+
+  const { language } = useLanguage();
+
   return (
-    <div className="h-full overflow-y-auto px-4 py-4">
-      <h2 className="text-xl font-bold text-center mb-1">{t('pricing.title')}</h2>
-      <p className="text-muted-foreground text-center text-sm mb-4">{t('pricing.subtitle')}</p>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {plans.map((plan, i) => (
-          <div key={i} className="bg-secondary rounded-xl p-4 text-center">
-            <h3 className="font-semibold text-sm mb-2">{plan.name}</h3>
-            <div className="text-2xl font-bold text-primary mb-3">
-              {plan.price} <span className="text-xs text-muted-foreground">EGP{t('pricing.perDay')}</span>
+    <div className="h-full overflow-y-auto px-6 py-6">
+      {/* Campaign Plans Section */}
+      <section className="mb-10">
+        <h2 className="text-2xl font-bold text-center mb-2">{t('pricing.campaignTitle')}</h2>
+        <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.campaignSubtitle')}</p>
+        
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
+          {campaignPlans.map((plan, i) => (
+            <div 
+              key={i}
+              className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-4 border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] cursor-pointer opacity-0 animate-fade-in-up ${
+                plan.popular ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-border/30 hover:border-primary/50'
+              }`}
+              style={{ animationDelay: `${i * 50}ms` }}
+            >
+              {plan.popular && (
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {t('pricing.popular')}
+                </div>
+              )}
+              <div className="text-center">
+                <div className="text-lg font-bold mb-1">
+                  {plan.days} {plan.days === 1 ? t('pricing.day') : t('pricing.days')}
+                </div>
+                <div className="text-2xl font-bold text-primary mb-2">
+                  {plan.price.toLocaleString()}
+                  <span className="text-xs text-muted-foreground ml-1">EGP</span>
+                </div>
+                <button className="w-full py-2 bg-primary/10 text-primary text-xs font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                  {t('pricing.startCampaign')}
+                </button>
+              </div>
             </div>
-            <ul className="text-xs text-muted-foreground space-y-1 text-start">
-              <li>• {t('pricing.service247')}</li>
-              <li>• {t('pricing.response30')}</li>
-              <li>• {plan.messages} {plan.perPlatform ? t('pricing.perPlatform') : t('pricing.messages')}</li>
-              <li>• {plan.platforms === '1' ? t('pricing.platform1') : t('pricing.platform3')}</li>
-            </ul>
+          ))}
+        </div>
+      </section>
+
+      {/* Subscription Plans Section */}
+      <section>
+        <h2 className="text-2xl font-bold text-center mb-2">{t('pricing.subscriptionTitle')}</h2>
+        <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.subscriptionSubtitle')}</p>
+
+        {Object.entries(subscriptionPlans).map(([duration, plans], groupIndex) => (
+          <div key={duration} className="mb-8">
+            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-primary/20 text-primary rounded-lg flex items-center justify-center text-sm font-bold">
+                {duration}
+              </span>
+              {duration === '1' ? t('pricing.dayPlan') : t('pricing.daysPlan').replace('{n}', duration)}
+            </h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {plans.map((plan, i) => (
+                <div 
+                  key={i}
+                  className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer opacity-0 animate-fade-in-up ${
+                    plan.bestValue ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.25)]' : 'border-border/30 hover:border-primary/50'
+                  }`}
+                  style={{ animationDelay: `${(groupIndex * 4 + i) * 50}ms` }}
+                >
+                  {plan.bestValue && (
+                    <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-400 text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full">
+                      {t('pricing.bestValue')}
+                    </div>
+                  )}
+                  
+                  <div className="text-center mb-4">
+                    <h4 className="font-bold text-lg mb-1">{language === 'ar' ? plan.nameAr : plan.name}</h4>
+                    <div className="text-3xl font-bold text-primary">
+                      {plan.price.toLocaleString()}
+                      <span className="text-sm text-muted-foreground ml-1">EGP</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-sm">
+                      <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                      <span className="text-muted-foreground">
+                        {plan.messages.toLocaleString()} {plan.perPlatform ? t('pricing.perPlatformMsg') : t('pricing.messages')}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="text-muted-foreground">
+                        {plan.platforms} {plan.platforms === 1 ? t('pricing.platform') : t('pricing.platforms')}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
+                    {t('pricing.subscribe')}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
-      </div>
+      </section>
     </div>
   );
 };
