@@ -21,6 +21,8 @@ const translations = {
     'hero.description': 'Auto Boom will make your brand respond in less than 30 seconds on WhatsApp, Instagram and Facebook',
     'hero.cta': 'Start Now',
     
+    'home.aiTagline': 'AI replies and sells for you so you can focus on the important stuff',
+    
     'whyUs.title': 'Why Choose Auto Boom?',
     'whyUs.subtitle': 'Fast chatbot service features',
     'whyUs.feature1.title': '⚡ Response in less than 30 seconds',
@@ -58,6 +60,7 @@ const translations = {
     'pricing.messages': 'messages',
     'pricing.perPlatformMsg': 'msg/platform',
     'pricing.platform': 'Platform',
+    'pricing.unlimited': 'Unlimited',
     'pricing.platforms': 'Platforms',
     
     'contact.title': 'Contact Us',
@@ -81,6 +84,8 @@ const translations = {
     'hero.titleHighlight': 'أسرع من البشر!',
     'hero.description': 'Auto Boom هتخلي البراند بتاعك يرد في أقل من 30 ثانية على واتساب وإنستا وفيسبوك',
     'hero.cta': 'ابدأ دلوقتي',
+    
+    'home.aiTagline': 'الـ AI يرد ويبيع مكانك وعشان تركز في التقيل',
     
     'whyUs.title': 'لماذا تختار Auto Boom؟',
     'whyUs.subtitle': 'مميزات خدمة الشات بوت السريع',
@@ -119,6 +124,7 @@ const translations = {
     'pricing.messages': 'رسالة',
     'pricing.perPlatformMsg': 'رسالة/منصة',
     'pricing.platform': 'منصة',
+    'pricing.unlimited': 'لا نهائي',
     'pricing.platforms': 'منصات',
     
     'contact.title': 'تواصل معنا',
