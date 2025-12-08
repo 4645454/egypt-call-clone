@@ -118,8 +118,8 @@ const WhyUsContent = () => {
             <div className="w-20 h-20 rounded-xl overflow-hidden mb-4">
               <img src={feature.image} alt="" className="w-full h-full object-cover" />
             </div>
-            <h3 className="font-semibold text-base mb-2">{feature.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
+            <h3 className="font-semibold text-base mb-2 text-white">{feature.title}</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">{feature.desc}</p>
           </div>
         ))}
       </div>
