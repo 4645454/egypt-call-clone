@@ -67,6 +67,7 @@ const translations = {
     'pricing.platforms': 'Platforms',
     
     'contact.title': 'Contact Us',
+    'contact.bookCall': 'Book a call to discuss the details',
     'contact.name': 'Your Name',
     'contact.brand': 'Brand Name',
     'contact.whatsapp': 'WhatsApp Number',
@@ -134,6 +135,7 @@ const translations = {
     'pricing.platforms': 'منصات',
     
     'contact.title': 'تواصل معنا',
+    'contact.bookCall': 'لحجز مكالمة نناقش فيها التفاصيل',
     'contact.name': 'اسمك',
     'contact.brand': 'اسم البراند',
     'contact.whatsapp': 'رقم الواتساب',
