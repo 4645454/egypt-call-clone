@@ -40,16 +40,21 @@ const HomeContent = () => {
   return (
     <div className="flex flex-col h-full px-8 py-6">
       {/* AI Tagline */}
-      <div className="text-center mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-white">
-          {t('home.aiTagline')} 🔥
+      <div className="text-center mb-6 animate-fade-in">
+        <h2 className="text-xl md:text-2xl font-bold text-white leading-relaxed">
+          <span className="block">{t('home.aiTagline1')}</span>
+          <span className="block">{t('home.aiTagline2')} 🔥</span>
         </h2>
       </div>
       
       {/* Videos Section */}
       <div className="flex-1 flex items-center justify-center gap-6">
-        {videos.map((video) => (
-          <div key={video.name} className="flex flex-col items-center group">
+        {videos.map((video, index) => (
+          <div 
+            key={video.name} 
+            className="flex flex-col items-center group opacity-0 animate-fade-in"
+            style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
+          >
             <div className="flex items-center gap-2 mb-3">
               <video.icon />
               <span className="text-sm font-medium text-foreground">{video.name}</span>
@@ -60,7 +65,7 @@ const HomeContent = () => {
               loop
               muted
               playsInline
-              className="w-72 h-[450px] object-cover rounded-2xl border border-border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/20 group-hover:border-primary/50"
+              className="w-72 h-[450px] object-cover rounded-2xl border border-border transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-primary/30 group-hover:border-primary/50"
             />
           </div>
         ))}
@@ -176,17 +181,17 @@ const PlatformsContent = () => {
 
 const PricingContent = () => {
   const { t, language } = useLanguage();
-  const [selectedCampaignDays, setSelectedCampaignDays] = useState<number | null>(null);
-  const [selectedSubscriptionDays, setSelectedSubscriptionDays] = useState<string | null>(null);
+  const [selectedCampaignDays, setSelectedCampaignDays] = useState<number | null>(7);
+  const [selectedSubscriptionDays, setSelectedSubscriptionDays] = useState<string | null>('30');
   
   const campaignPlans = [
-    { days: 1, price: 200, popular: false },
-    { days: 3, price: 500, popular: false },
-    { days: 7, price: 1000, popular: true },
-    { days: 10, price: 1500, popular: false },
-    { days: 15, price: 2200, popular: false },
-    { days: 20, price: 3000, popular: false },
-    { days: 30, price: 4500, popular: false },
+    { days: 1, price: 200, popular: false, messages: 500 },
+    { days: 3, price: 500, popular: false, messages: 1500 },
+    { days: 7, price: 1000, popular: true, messages: 3500 },
+    { days: 10, price: 1500, popular: false, messages: 5000 },
+    { days: 15, price: 2200, popular: false, messages: 7000 },
+    { days: 20, price: 3000, popular: false, messages: 9000 },
+    { days: 30, price: 4500, popular: false, messages: 12000 },
   ];
 
   const subscriptionPlans: Record<string, Array<{ name: string; nameAr: string; price: number; messages: number; platforms: number; perPlatform: boolean; bestValue?: boolean }>> = {
@@ -222,13 +227,13 @@ const PricingContent = () => {
   return (
     <div className="h-full overflow-y-auto px-6 py-6">
       {/* Campaign Plans Section */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold text-center mb-2 text-white">{t('pricing.campaignTitle')}</h2>
-        <p className="text-gray-300 text-center text-sm mb-6">{t('pricing.campaignSubtitle')}</p>
+      <section className="mb-10 opacity-0 animate-fade-in" style={{ animationFillMode: 'forwards' }}>
+        <h2 className="text-2xl font-bold text-center mb-2 text-foreground">{t('pricing.campaignTitle')}</h2>
+        <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.campaignSubtitle')}</p>
         
         {/* Campaign Days Tabs */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-1 bg-[#0f0f1a] rounded-full p-1.5 border border-border/30">
+          <div className="inline-flex items-center gap-1 bg-secondary/50 dark:bg-[#0f0f1a] rounded-full p-1.5 border border-border/30">
             {campaignDaysOptions.map((days) => (
               <button
                 key={days}
@@ -236,7 +241,7 @@ const PricingContent = () => {
                 className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
                   selectedCampaignDays === days
                     ? 'bg-primary text-primary-foreground font-medium'
-                    : 'text-gray-400 hover:text-white'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {days} {days === 1 ? t('pricing.day') : t('pricing.days')}
@@ -247,13 +252,13 @@ const PricingContent = () => {
         
         {/* Campaign Cards */}
         {selectedCampaignDays !== null && (
-          <div className="flex justify-center">
+          <div className="flex justify-center animate-scale-in">
             {campaignPlans
               .filter((plan) => plan.days === selectedCampaignDays)
               .map((plan, i) => (
                 <div 
                   key={i}
-                  className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-6 border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] cursor-pointer animate-fade-in max-w-xs w-full ${
+                  className={`relative bg-gradient-to-br from-secondary/80 to-secondary/40 dark:from-[#1a1a2e] dark:to-[#0f0f1a] rounded-2xl p-6 border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] cursor-pointer max-w-sm w-full ${
                     plan.popular ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-border/30 hover:border-primary/50'
                   }`}
                 >
@@ -263,19 +268,36 @@ const PricingContent = () => {
                     </div>
                   )}
                   <div className="text-center">
-                    <div className="text-xl font-bold mb-2 text-white">
+                    <div className="text-xl font-bold mb-2 text-foreground">
                       {plan.days} {plan.days === 1 ? t('pricing.day') : t('pricing.days')}
                     </div>
-                    <div className="text-3xl font-bold text-primary mb-3">
+                    <div className="text-3xl font-bold text-primary mb-4">
                       {plan.price.toLocaleString()}
-                      <span className="text-sm text-gray-400 ml-1">EGP</span>
+                      <span className="text-sm text-muted-foreground ml-1">EGP</span>
                     </div>
-                    <div className="flex items-center justify-center gap-2 text-sm text-gray-300 mb-4">
-                      <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{t('pricing.unlimited')}</span>
+                    
+                    {/* Features */}
+                    <div className="space-y-3 mb-5 text-start">
+                      <div className="flex items-center gap-2 text-sm">
+                        <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-foreground">{t('pricing.unlimitedComments')}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                        <span className="text-foreground">{t('pricing.upTo')} {plan.messages.toLocaleString()} {t('pricing.messages')}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-foreground">{t('pricing.unlimited')}</span>
+                      </div>
                     </div>
+                    
                     <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
                       {t('pricing.startCampaign')}
                     </button>
@@ -287,13 +309,13 @@ const PricingContent = () => {
       </section>
 
       {/* Subscription Plans Section */}
-      <section>
-        <h2 className="text-2xl font-bold text-center mb-2 text-white">{t('pricing.subscriptionTitle')}</h2>
-        <p className="text-gray-300 text-center text-sm mb-6">{t('pricing.subscriptionSubtitle')}</p>
+      <section className="opacity-0 animate-fade-in" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+        <h2 className="text-2xl font-bold text-center mb-2 text-foreground">{t('pricing.subscriptionTitle')}</h2>
+        <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.subscriptionSubtitle')}</p>
 
         {/* Subscription Days Tabs */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-1 bg-[#0f0f1a] rounded-full p-1.5 border border-border/30">
+          <div className="inline-flex items-center gap-1 bg-secondary/50 dark:bg-[#0f0f1a] rounded-full p-1.5 border border-border/30">
             {subscriptionDaysOptions.map((days) => (
               <button
                 key={days}
@@ -301,7 +323,7 @@ const PricingContent = () => {
                 className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
                   selectedSubscriptionDays === days
                     ? 'bg-primary text-primary-foreground font-medium'
-                    : 'text-gray-400 hover:text-white'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {days} {days === '1' ? t('pricing.day') : t('pricing.days')}
@@ -312,13 +334,14 @@ const PricingContent = () => {
 
         {/* Subscription Cards */}
         {selectedSubscriptionDays !== null && subscriptionPlans[selectedSubscriptionDays] && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-fade-in">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {subscriptionPlans[selectedSubscriptionDays].map((plan, i) => (
               <div 
                 key={i}
-                className={`relative bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer ${
+                className={`relative bg-gradient-to-br from-secondary/80 to-secondary/40 dark:from-[#1a1a2e] dark:to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer opacity-0 animate-scale-in ${
                   plan.bestValue ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.25)]' : 'border-border/30 hover:border-primary/50'
                 }`}
+                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards' }}
               >
                 {plan.bestValue && (
                   <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-400 text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full">
@@ -327,10 +350,10 @@ const PricingContent = () => {
                 )}
                 
                 <div className="text-center mb-4">
-                  <h4 className="font-bold text-lg mb-1 text-white">{language === 'ar' ? plan.nameAr : plan.name}</h4>
+                  <h4 className="font-bold text-lg mb-1 text-foreground">{language === 'ar' ? plan.nameAr : plan.name}</h4>
                   <div className="text-3xl font-bold text-primary">
                     {plan.price.toLocaleString()}
-                    <span className="text-sm text-gray-400 ml-1">EGP</span>
+                    <span className="text-sm text-muted-foreground ml-1">EGP</span>
                   </div>
                 </div>
 
@@ -339,7 +362,7 @@ const PricingContent = () => {
                     <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
-                    <span className="text-gray-300">
+                    <span className="text-foreground">
                       {plan.messages.toLocaleString()} {plan.perPlatform ? t('pricing.perPlatformMsg') : t('pricing.messages')}
                     </span>
                   </div>
@@ -347,7 +370,7 @@ const PricingContent = () => {
                     <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-gray-300">
+                    <span className="text-foreground">
                       {plan.platforms} {plan.platforms === 1 ? t('pricing.platform') : t('pricing.platforms')}
                     </span>
                   </div>
