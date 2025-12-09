@@ -41,7 +41,7 @@ const HomeContent = () => {
     <div className="flex flex-col h-full px-8 py-6">
       {/* AI Tagline */}
       <div className="text-center mb-6 animate-fade-in">
-        <h2 className="text-xl md:text-2xl font-bold text-white leading-relaxed">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground leading-relaxed">
           <span className="block">{t('home.aiTagline1')}</span>
           <span className="block">{t('home.aiTagline2')} 🔥</span>
         </h2>
@@ -52,8 +52,8 @@ const HomeContent = () => {
         {videos.map((video, index) => (
           <div 
             key={video.name} 
-            className="flex flex-col items-center group opacity-0 animate-fade-in"
-            style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
+            className="flex flex-col items-center group animate-fade-in"
+            style={{ animationDelay: `${index * 150}ms` }}
           >
             <div className="flex items-center gap-2 mb-3">
               <video.icon />
@@ -227,7 +227,7 @@ const PricingContent = () => {
   return (
     <div className="h-full overflow-y-auto px-6 py-6">
       {/* Campaign Plans Section */}
-      <section className="mb-10 opacity-0 animate-fade-in" style={{ animationFillMode: 'forwards' }}>
+      <section className="mb-10 animate-fade-in">
         <h2 className="text-2xl font-bold text-center mb-2 text-foreground">{t('pricing.campaignTitle')}</h2>
         <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.campaignSubtitle')}</p>
         
@@ -309,7 +309,7 @@ const PricingContent = () => {
       </section>
 
       {/* Subscription Plans Section */}
-      <section className="opacity-0 animate-fade-in" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+      <section className="animate-fade-in" style={{ animationDelay: '200ms' }}>
         <h2 className="text-2xl font-bold text-center mb-2 text-foreground">{t('pricing.subscriptionTitle')}</h2>
         <p className="text-muted-foreground text-center text-sm mb-6">{t('pricing.subscriptionSubtitle')}</p>
 
@@ -338,10 +338,10 @@ const PricingContent = () => {
             {subscriptionPlans[selectedSubscriptionDays].map((plan, i) => (
               <div 
                 key={i}
-                className={`relative bg-gradient-to-br from-secondary/80 to-secondary/40 dark:from-[#1a1a2e] dark:to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer opacity-0 animate-scale-in ${
+                className={`relative bg-gradient-to-br from-secondary/80 to-secondary/40 dark:from-[#1a1a2e] dark:to-[#0f0f1a] rounded-2xl p-5 border transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] cursor-pointer animate-scale-in ${
                   plan.bestValue ? 'border-primary shadow-[0_0_20px_rgba(59,130,246,0.25)]' : 'border-border/30 hover:border-primary/50'
                 }`}
-                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards' }}
+                style={{ animationDelay: `${i * 100}ms` }}
               >
                 {plan.bestValue && (
                   <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-blue-400 text-primary-foreground text-[10px] font-bold px-3 py-0.5 rounded-full">
