@@ -185,13 +185,13 @@ const PricingContent = () => {
   const [selectedSubscriptionDays, setSelectedSubscriptionDays] = useState<string | null>('30');
   
   const campaignPlans = [
-    { days: 1, price: 200, popular: false, messages: 500 },
-    { days: 3, price: 500, popular: false, messages: 1500 },
-    { days: 7, price: 1000, popular: true, messages: 3500 },
-    { days: 10, price: 1500, popular: false, messages: 5000 },
-    { days: 15, price: 2200, popular: false, messages: 7000 },
-    { days: 20, price: 3000, popular: false, messages: 9000 },
-    { days: 30, price: 4500, popular: false, messages: 12000 },
+    { days: 1, price: 200, popular: false, messages: 1000 },
+    { days: 3, price: 500, popular: false, messages: 2000 },
+    { days: 7, price: 1000, popular: true, messages: 4000 },
+    { days: 10, price: 1500, popular: false, messages: 5500 },
+    { days: 15, price: 2200, popular: false, messages: 7500 },
+    { days: 20, price: 3000, popular: false, messages: 9500 },
+    { days: 30, price: 4500, popular: false, messages: 12500 },
   ];
 
   const subscriptionPlans: Record<string, Array<{ name: string; nameAr: string; price: number; messages: number; platforms: number; perPlatform: boolean; bestValue?: boolean }>> = {
