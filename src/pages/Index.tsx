@@ -179,7 +179,7 @@ const PlatformsContent = () => {
   );
 };
 
-const PricingContent = () => {
+const PricingContent = ({ onNavigateToContact }: { onNavigateToContact: () => void }) => {
   const { t, language } = useLanguage();
   const [selectedCampaignDays, setSelectedCampaignDays] = useState<number | null>(7);
   const [selectedSubscriptionDays, setSelectedSubscriptionDays] = useState<string | null>('30');
@@ -292,7 +292,10 @@ const PricingContent = () => {
                       </div>
                     </div>
                     
-                    <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
+                    <button 
+                      onClick={onNavigateToContact}
+                      className="w-full py-2.5 bg-primary/10 text-primary text-sm font-medium rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30"
+                    >
                       {t('pricing.startCampaign')}
                     </button>
                   </div>
@@ -370,7 +373,10 @@ const PricingContent = () => {
                   </div>
                 </div>
 
-                <button className="w-full py-2.5 bg-primary/10 text-primary text-sm font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30">
+                <button 
+                  onClick={onNavigateToContact}
+                  className="w-full py-2.5 bg-primary/10 text-primary text-sm font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-primary/30"
+                >
                   {t('pricing.subscribe')}
                 </button>
               </div>
@@ -470,7 +476,7 @@ const MainApp = () => {
       case 'home': return <HomeContent />;
       case 'whyUs': return <WhyUsContent />;
       case 'platforms': return <PlatformsContent />;
-      case 'pricing': return <PricingContent />;
+      case 'pricing': return <PricingContent onNavigateToContact={() => setActiveTab('contact')} />;
       case 'contact': return <ContactContent />;
       default: return <HomeContent />;
     }
