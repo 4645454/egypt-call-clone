@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 import { Sun, Moon } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-new.png";
 import featureSpeed from "@/assets/feature-speed.jpg";
 import feature247 from "@/assets/feature-247.jpg";
 import featureBrandVoice from "@/assets/feature-brand-voice.jpg";
