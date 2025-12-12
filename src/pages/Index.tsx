@@ -424,14 +424,6 @@ const ContactContent = () => {
         {t('hero.cta')}
       </button>
       
-      {/* Email */}
-      <div className="text-center mb-6">
-        <p className="text-muted-foreground text-sm mb-2">{t('footer.email')}</p>
-        <a href="mailto:info@viralboom.online" className="text-primary hover:underline">
-          info@viralboom.online
-        </a>
-      </div>
-      
       {/* Social Links */}
       <div className="flex items-center gap-6">
         {socialLinks.map((social) => (
